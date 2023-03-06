@@ -31,9 +31,8 @@ const FormRegister = () => {
         if(!response.ok){
             throw new Error('Invalid Register')
         }
-        console.log(response)
-        setRegisData({names: '', phoneNumber : '', email: '', password: ''})
-        router.push('/login')
+        // console.log(response)
+        router.push('/auth/login')
     }
 
   return (
