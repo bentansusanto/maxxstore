@@ -1,45 +1,43 @@
-import React from 'react'
-import { useState } from 'react';
-import { Login } from '../../utils/typeauth';
-import { useRouter } from 'next/router';
-
-
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import { Login } from "../../utils/typeauth";
 
 const FormLogin = () => {
-    const [loginData, setLoginData] = useState<Login>({
-        'email' : '',
-        'password' : ''
-    })
-    const base_Url = 'https://web-service.herokuapp.com'
-    const router = useRouter()
+  const [loginData, setLoginData] = useState<Login>({
+    email: "",
+    password: "",
+  });
+  const base_Url = "https://web-service.herokuapp.com";
+  const router = useRouter();
 
-    const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setLoginData({
-            ...loginData,
-            [e.target.name] : e.target.value
-        })
-    }
+  const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoginData({
+      ...loginData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-    const submitLogin = async(e: React.ChangeEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const response = await fetch(`${base_Url}/auth/login`, {
-            method: "POST",
-            headers : {"Content-Type" : "application/json"},
-            body : JSON.stringify({
-                ...loginData
-            })
-        })
-        if(!response.ok){
-            throw new Error("Invalid Login")
-        }
-        const data = await response.json()
-        localStorage.setItem('token', data.token)
-        router.push('/')
+  const submitLogin = async (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const response = await fetch(`${base_Url}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...loginData,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error("Invalid Login");
     }
+    const data = await response.json();
+    // console.log(data);
+    localStorage.setItem('token', data.token)
+    router.push("/");
+  };
 
   return (
     <div>
-        <form onSubmit={submitLogin} className="w-[24rem] mt-14">
+      <form onSubmit={submitLogin} className="w-[24rem] mt-14">
         <div className="mb-4 space-y-2">
           <label htmlFor="#" className="font-semibold">
             Email
@@ -71,7 +69,7 @@ const FormLogin = () => {
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default FormLogin
+export default FormLogin;
