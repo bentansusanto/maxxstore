@@ -2,29 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import BgLogin from "../../public/assets/bg-auth.webp";
 import FormLogin from "./FormLogin";
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
+import MediaQuery from "../mediaQuery/MediaQuery";
 
-
-const useMediaQuery = (query: string) => {
-  const [matches, setMatches] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia(query);
-    setMatches(mediaQuery.matches);
-
-    const handler = (event: MediaQueryListEvent) => {
-      setMatches(event.matches);
-    };
-
-    mediaQuery.addEventListener("change", handler);
-    return () => mediaQuery.removeEventListener("change", handler);
-  }, [query]);
-
-  return matches;
-};
 
 const Loginpage = () => {
-  const isMobile = useMediaQuery("(max-width: 600px)");
+  const isMobile = MediaQuery("(max-width: 600px)");
 
   // useEffect(() => {
   //   function handleResize() {
