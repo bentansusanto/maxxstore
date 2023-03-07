@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Register } from '../../utils/typeauth';
 
-const FormRegister = () => {
+const FormRegister = ({isMobile} : {isMobile:boolean}) => {
     const [regisData, setRegisData] = useState<Register>({
         'names' : '',
         'phoneNumber' : '',
@@ -37,7 +37,7 @@ const FormRegister = () => {
 
   return (
     <div>
-      <form onSubmit={submitRegister} className="w-[24rem] mt-14">
+      <form onSubmit={submitRegister} className={` ${isMobile ? "w-full" : "w-[24rem]"}  mt-14`}>
         <div className="mb-4 space-y-2">
           <label htmlFor="#" className="font-semibold">
             Full Name

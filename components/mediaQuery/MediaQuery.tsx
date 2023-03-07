@@ -1,8 +1,7 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from "react";
 
 const MediaQuery = (query: string) => {
-    const [matches, setMatches] = useState(false);
+  const [matches, setMatches] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(query);
@@ -17,6 +16,9 @@ const MediaQuery = (query: string) => {
   }, [query]);
 
   return matches;
-}
+};
 
-export default MediaQuery
+
+
+export default MediaQuery;
+

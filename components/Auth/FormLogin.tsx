@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { Login } from "../../utils/typeauth";
 
-const FormLogin = () => {
+const FormLogin = ({isMobile} : {isMobile: boolean}) => {
   const [loginData, setLoginData] = useState<Login>({
     email: "",
     password: "",
@@ -37,7 +37,7 @@ const FormLogin = () => {
 
   return (
     <div>
-      <form onSubmit={submitLogin} className="w-[24rem] mt-14">
+      <form onSubmit={submitLogin} className={` ${isMobile ? "w-full" : "w-[24rem]"} mt-14`}>
         <div className="mb-4 space-y-2">
           <label htmlFor="#" className="font-semibold">
             Email
@@ -65,11 +65,12 @@ const FormLogin = () => {
           />
         </div>
         <button className="bg-blue-500 p-4 text-center w-full uppercase font-semibold rounded-md shadow-md">
-          Create Account
+          Login Now
         </button>
       </form>
     </div>
   );
 };
+
 
 export default FormLogin;
