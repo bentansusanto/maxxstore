@@ -5,33 +5,51 @@ import FormLogin from "./FormLogin";
 import { useEffect, useState } from 'react';
 
 
-const Loginpage = () => {
-  const [isMobile, setIsMobile] = useState(false)
+const useMediaQuery = (query: string) => {
+  const [matches, setMatches] = useState(false);
 
   useEffect(() => {
-    function handleResize() {
-      setIsMobile(window.innerWidth < 600); 
-    }
+    const mediaQuery = window.matchMedia(query);
+    setMatches(mediaQuery.matches);
 
-    // Set initial value based on localStorage if available
-    const localStorageValue = localStorage.getItem("isMobile");
-    if (localStorageValue !== null) {
-      setIsMobile(localStorageValue === "true");
-    } else {
-      handleResize();
-    }
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
+    const handler = (event: MediaQueryListEvent) => {
+      setMatches(event.matches);
     };
-  }, []);
 
-  // Save `isMobile` state to localStorage
-  useEffect(() => {
-    localStorage.setItem("isMobile", String(isMobile));
-  }, [isMobile]);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, [query]);
+
+  return matches;
+};
+
+const Loginpage = () => {
+  const isMobile = useMediaQuery("(max-width: 600px)");
+
+  // useEffect(() => {
+  //   function handleResize() {
+  //     setIsMobile(window.innerWidth < 600); 
+  //   }
+
+  //   // Set initial value based on localStorage if available
+  //   const localStorageValue = localStorage.getItem("isMobile");
+  //   if (localStorageValue !== null) {
+  //     setIsMobile(localStorageValue === "true");
+  //   } else {
+  //     handleResize();
+  //   }
+
+  //   window.addEventListener("resize", handleResize);
+
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
+
+  // // Save `isMobile` state to localStorage
+  // useEffect(() => {
+  //   localStorage.setItem("isMobile", String(isMobile));
+  // }, [isMobile]);
 
   return (
     <div>
