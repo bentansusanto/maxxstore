@@ -8,31 +8,46 @@ import { useEffect, useState } from 'react';
 const Loginpage = () => {
   const [isMobile, setIsMobile] = useState(false)
 
-  useEffect(() => {
-    function handleResize() {
-      setIsMobile(window.innerWidth < 768); // change breakpoint as needed
-    }
+  // useEffect(() => {
+  //   function handleResize() {
+  //     setIsMobile(window.innerWidth < 600); 
+  //   }
 
     // Set initial value based on localStorage if available
-    const localStorageValue = localStorage.getItem("isMobile");
-    if (localStorageValue !== null) {
-      setIsMobile(localStorageValue === "true");
-    } else {
-      handleResize();
-    }
+  //   const localStorageValue = localStorage.getItem("isMobile");
+  //   if (localStorageValue !== null) {
+  //     setIsMobile(localStorageValue === "true");
+  //   } else {
+  //     handleResize();
+  //   }
 
-    window.addEventListener("resize", handleResize);
+  //   window.addEventListener("resize", handleResize);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
 
   // Save `isMobile` state to localStorage
-  useEffect(() => {
-    localStorage.setItem("isMobile", String(isMobile));
-  }, [isMobile]);
+  // useEffect(() => {
+  //   localStorage.setItem("isMobile", String(isMobile));
+  // }, [isMobile]);
 
+  useEffect(() => {
+    if(typeof window !== 'undefined'){
+      const mediaQuery = window.matchMedia("(max-width: 600px)");
+
+      const handleMediaQuery = (event: MediaQueryListEvent) => {
+        setIsMobile(event.matches);
+      };
+
+      mediaQuery.addListener(handleMediaQuery);
+
+      return () => {
+        mediaQuery.removeListener(handleMediaQuery);
+      };
+    }
+  }, [])
   return (
     <div>
       {
