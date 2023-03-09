@@ -1,0 +1,6 @@
+.hero{
+    background-image: url('../public/assets/atikh-bana-_KaMTEmJnxY-unsplash.webp');
+    background-position: center;
+    background-size: cover;
+    @apply w-screen h-[75vh] md:px-20 px-5 
+}

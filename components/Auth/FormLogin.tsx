@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { Login } from "../../utils/typeauth";
+import { useEffect } from 'react';
 
 const FormLogin = ({isMobile} : {isMobile: boolean}) => {
   const [loginData, setLoginData] = useState<Login>({
@@ -9,6 +10,7 @@ const FormLogin = ({isMobile} : {isMobile: boolean}) => {
   });
   const base_Url = "https://web-service.herokuapp.com";
   const router = useRouter();
+  // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
   const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginData({
@@ -32,8 +34,22 @@ const FormLogin = ({isMobile} : {isMobile: boolean}) => {
     const data = await response.json();
     // console.log(data);
     localStorage.setItem('token', data.token)
+    // setIsLoggedIn(true)
     router.push("/");
   };
+
+  
+  useEffect(() => {
+    const checkLoggedIn = () => {
+      // This is a mock implementation for checking if the user is logged in
+      const token = localStorage.getItem('token');
+      if (token) {
+        router.push('/');
+      }
+    };
+    checkLoggedIn()
+  });
+  
 
   return (
     <div>
