@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { BiHomeSmile, BiStore, BiUserCircle } from "react-icons/bi";
+import { BiHomeSmile, BiUserCircle } from "react-icons/bi";
 import { BsCart2, BsTelephoneOutbound } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
@@ -15,14 +15,12 @@ import NavIsAuth from "./NavIsAuth";
 
 const links: QuicLink[] = [
   { page: "Home", link: "/" },
-  { page: "Product", link: "/product" },
   { page: "Service", link: "/service" },
   { page: "Contact", link: "/contact" },
 ];
 
 const mobileLinks: MobileLink[] = [
   { page: "Home", link: "/", icon: <BiHomeSmile /> },
-  { page: "Product", link: "/product", icon: <BiStore /> },
   { page: "Service", link: "/service", icon: <MdMiscellaneousServices /> },
   { page: "Contact", link: "/contact", icon: <BsTelephoneOutbound /> },
 ];
@@ -159,7 +157,7 @@ const Navbar = () => {
           <Image src={Logo} alt="logo-maxxstore" className="w-14" />
 
           {/* Navlink */}
-          <ul className="flex space-x-10 ml-auto">
+          <ul className="flex space-x-10 ml-12">
             {links.map((val, idx) => (
               <li key={idx}>
                 <Link href={val.link}>{val.page}</Link>
