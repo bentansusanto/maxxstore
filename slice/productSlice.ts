@@ -6,7 +6,7 @@ export const fetchProducts = createAsyncThunk('products/getAllProduct', async() 
     try {
         const response = await fetch(`${base_Url}/products?limit=32`)
         const data = await response.json()
-        console.log(data.products)
+        // console.log(data.products)
         return data.products
    } catch (error) {
     console.log(error)
