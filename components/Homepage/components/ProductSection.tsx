@@ -52,11 +52,11 @@ const ProductSection = () => {
         </div>) : 
         // Desktop
         (<div className="mx-20 flex space-x-10 justify-center mt-20 mb-40">
-        <div className="bg-gray-100 p-5 w-[16rem] h-[35rem]">
+        <div className="bg-gray-100 p-5 w-[16rem] h-[42rem]">
           {/* Category */}
           <div>
            <h4 className='font-semibold'>Category</h4>
-            <div onClick={handleFilterCategory} className="mt-5">
+            <div onClick={handleFilterCategory} className="mt-5 space-y-2">
               {
                 categories?.map((val : string) => (
                   <div key={val} className="flex items-center space-x-2 cursor-pointer">
