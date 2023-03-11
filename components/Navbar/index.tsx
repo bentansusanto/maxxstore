@@ -45,7 +45,7 @@ const Navbar = () => {
           },
         });
         if (!response.ok) {
-          throw new Error("Unauthorized");
+          throw new Error()
         }
         const content = await response.json();
         setData(content);
@@ -67,7 +67,6 @@ const Navbar = () => {
       if (!response.ok) {
         throw new Error("Unauthorized");
       }
-      console.log(response);
       localStorage.removeItem("token");
       router.push("/auth/login");
     } catch (error) {
@@ -106,7 +105,7 @@ const Navbar = () => {
           <div
             className={`${
               openNav
-                ? "bg-gray-200 w-full h-screen absolute top-0 p-5"
+                ? "bg-gray-200 w-full h-screen fixed z-20 top-0 p-5"
                 : "hidden"
             }`}
           >
@@ -145,9 +144,12 @@ const Navbar = () => {
                   <Link href={val.link}>{val.page}</Link>
                 </li>
               ))}
-              <li onClick={Logout} className="text-red-500">
+              {
+                isAuth ? 
+                (<li onClick={Logout} className="text-red-500">
                 Logout
-              </li>
+              </li>) : ""
+              }
             </ul>
           </div>
         </div>
